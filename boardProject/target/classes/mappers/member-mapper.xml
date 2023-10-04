@@ -77,6 +77,14 @@
   								 MEMBER_EMAIL = 'user01'
   	 -->
  	
+ 	
+ 	<!-- 
+ 		<select></select>
+ 		<insert></insert>
+ 		<update></update>
+ 		<delete></delete>
+ 		사용 가능한 속성도 조금씩 다름
+ 	 -->
 	<select id="login" parameterType="Member" resultMap="member_rm">
   		SELECT MEMBER_NO, MEMBER_EMAIL, MEMBER_NICKNAME, MEMBER_PW,
 			MEMBER_TEL, MEMBER_ADDR, PROFILE_IMG, AUTHORITY,
