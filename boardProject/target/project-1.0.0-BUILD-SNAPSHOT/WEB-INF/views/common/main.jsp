@@ -31,7 +31,20 @@
 		<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
 		<section class="content">
-			<section class="content-1"></section>
+			<section class="content-1">
+			
+				<h3>로그인된 회원 정보</h3>
+				${sessionScope.loginMember}
+				
+				<h3>닉네임이 일치하는 회원의 전화번호 조회</h3>
+				
+				<input type="text" id="inputNickname">
+				<button id="btn1">조회</button>
+				<h4 id="result1"></h4>
+			
+				<hr>
+				
+			</section>
 			<!-- 아이디, 비밀번호, 로그인 버튼 영역 -->
 			<section class="content-2">
 			
@@ -58,7 +71,7 @@
 
 					<label>
 						
-						<c:if test"${not empty coookie.saveId.value}">
+						<c:if test="${not empty cookie.saveId.value}">
 							<%-- 쿠키에 저장된 이메일이 있으면 변수 선언 : save --%>
 						
 							<c:set var="save" value="checked"/>
@@ -107,6 +120,8 @@
 	</main>
 
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-
+	
+	<!-- main.js 추가 -->
+	<script src="/resources/js/main.js"></script>
 </body>
 </html>

@@ -69,7 +69,29 @@
 		    <artifactId>commons-dbcp2</artifactId>
 		    <version>2.9.0</version>
 		</dependency>
+		
+		<!-- Spring-security 모듈추가 -->
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-core</artifactId>
+		    <version>5.7.1</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-web</artifactId>
+		    <version>5.7.1</version>
+		</dependency>
 				
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-config -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-config</artifactId>
+		    <version>5.7.1</version>
+		</dependency>
+		
 		
 		<!-- Spring 모듈 -->
 		<dependency>
@@ -170,7 +192,7 @@
 		    <artifactId>spring-test</artifactId>
 		    <version>${org.springframework-version}</version>
 		    <scope>test</scope>
-		</dependency>    
+		</dependency>
 	</dependencies>
 	
 	<!-- build : 프로젝트 빌드 시 사용되는 플러그인 추가 및 버전 정보 설정 -->
