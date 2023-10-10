@@ -13,4 +13,7 @@
 		INSERT INTO "AUTH_KEY" VALUES(SEQ_AUTH_KEY_NO.NEXTVAL, #{authKey}, #{email}, DEFAULT)
 	</insert>
 	
+	<select id="selectOneAuthKey">
+		SELECT
+	</select>
 </mapper>

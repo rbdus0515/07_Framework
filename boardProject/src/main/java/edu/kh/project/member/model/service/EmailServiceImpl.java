@@ -111,5 +111,16 @@ public class EmailServiceImpl implements EmailService{
 
 	        return result;
 	    }
+
+	@Override
+	public int checkAuthKey(String email, String query) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("email", email);
+		map.put("authKey", query);
+		
+		int result = dao.selectOneAuthKey(query);
+		
+		return result;
+	}
 		
 }

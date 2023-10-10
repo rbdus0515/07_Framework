@@ -22,4 +22,8 @@ public class EmailDAO {
 		return sqlSession.insert("emailMapper.insertAuthKey", map);
 	}
 
+	public int selectOneAuthKey(String query) {
+		
+		return sqlSession.selectOne("emailMapper.selectOneAuthKey", query);
+	}
 }

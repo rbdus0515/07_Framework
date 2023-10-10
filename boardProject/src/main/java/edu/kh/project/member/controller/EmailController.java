@@ -20,4 +20,10 @@ public class EmailController {
 	public int singUp(String email) {
 		return service.signUp(email, "회원 가입");
 	}
+	
+	@GetMapping("/checkAuthKey")
+	@ResponseBody
+	public int checkAuthKey(String query) {
+		return service.checkAuthKey(email, query);
+	}
 }
