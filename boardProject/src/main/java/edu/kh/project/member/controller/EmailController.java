@@ -23,7 +23,7 @@ public class EmailController {
 	
 	@GetMapping("/checkAuthKey")
 	@ResponseBody
-	public int checkAuthKey(String query) {
-		return service.checkAuthKey(email, query);
+	public int checkAuthKey(String inputKey, String email) {
+		return service.checkAuthKey(inputKey, email);
 	}
 }

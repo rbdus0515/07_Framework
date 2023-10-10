@@ -4,8 +4,6 @@ public interface EmailService {
 
 	int signUp(String email, String string);
 
-	int checkAuthKey(String email, String query);
+	int checkAuthKey(String inputKey, String email);
 	
-	
-
 }

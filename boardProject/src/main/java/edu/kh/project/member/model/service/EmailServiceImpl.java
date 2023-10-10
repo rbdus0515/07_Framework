@@ -10,6 +10,7 @@ import javax.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import edu.kh.project.member.model.dao.EmailDAO;
 
@@ -54,6 +55,7 @@ public class EmailServiceImpl implements EmailService{
         return key;
     }
 
+    @Transactional
 	@Override
 	public int signUp(String email, String title) {
 		// 6자리 난수 인증번호 생성
@@ -113,12 +115,12 @@ public class EmailServiceImpl implements EmailService{
 	    }
 
 	@Override
-	public int checkAuthKey(String email, String query) {
+	public int checkAuthKey(String inputKey, String email) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("email", email);
-		map.put("authKey", query);
+		map.put("inputKey", inputKey);
 		
-		int result = dao.selectOneAuthKey(query);
+		int result = dao.selectOneAuthKey(map);
 		
 		return result;
 	}
