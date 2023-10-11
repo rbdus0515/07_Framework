@@ -94,5 +94,15 @@
 		AND MEMBER_EMAIL = #{memberEmail}
   	</select>
   	
+  	<insert id="signUp" parameterType="Member">
+  		INSERT INTO "MEMBER"
+  		VALUES (SEQ_MEMBER_NO.NEXTVAL
+  			, #{memberEmail}
+  			, #{memberPw}
+  			, #{memberNickname}
+  			, #{memberTel}
+  			, #{memberAddress}
+  			, NULL, DEFAULT, DEFAULT, DEFAULT)
+  	</insert>
   	
 </mapper>
