@@ -51,5 +51,16 @@ public class MemberDAO {
 
 
 
+	/** 마이페이지 정보 업데이트 DAO
+	 * @param updateMember
+	 * @return
+	 */
+	public int update(Member updateMember) {
+		return sqlSession.update("memberMapper.update", updateMember);
+	}
+
+
+
+
 	
 }

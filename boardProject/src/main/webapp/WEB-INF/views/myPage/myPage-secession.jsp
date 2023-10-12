@@ -14,6 +14,9 @@
 
 </head>
 <body>
+
+<!-- 쿠키도 삭제해야함!!!!!! -->
+
     <main>
        <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
