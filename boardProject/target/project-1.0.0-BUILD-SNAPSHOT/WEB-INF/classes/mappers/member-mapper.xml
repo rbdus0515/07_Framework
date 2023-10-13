@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="memberMapper">
-	<!-- namespace : 해당 공간의 이름 지정 -->
-
-	<!-- mapper파일 생성 시 아래 태그 반드시 삭제 -->
- 	<!-- <cache-ref namespace=""/>  -->
- 	
- 	<!-- 
+	<!--  namespace : 해당 공간의 이름 지정 -->
+  
+  	<!-- mapper 파일 생성 시 아래 태그 반드시 삭제 -->
+  	<!--  <cache-ref namespace=""/> -->
+  
+  
+	<!-- 
 		resultMap  
 		- SELECT 조회 결과(ResultSet) 컬럼명과
 		  컬럼 값을 옮겨 담을 DTO의 필드명이 같지 않을 때
@@ -39,8 +40,9 @@
 		<result property="memberDeleteFlag" column="MEMBER_DEL_FL" />
 		<result property="authority" column="AUTHORITY" />
 	</resultMap>
-	
-	<!--  
+  
+  
+  	<!--  
   		SQL 관련 태그의 속성
   		
   		- parameterType : 전달 받은 값의 자료형
@@ -76,36 +78,40 @@
   		SELECT * FROM MEMBER WHERE ${test2} = #{test1}
   								 MEMBER_EMAIL = 'user01'
   	 -->
- 	
- 	
- 	<!-- 
- 		<select></select>
- 		<insert></insert>
- 		<update></update>
- 		<delete></delete>
- 		사용 가능한 속성도 조금씩 다름
- 	 -->
-	<select id="login" parameterType="Member" resultMap="member_rm">
+  
+  	<!-- 
+  		<select></select>
+  		<insert></insert>
+  		<update></update>
+  		<delete></delete>
+  		사용 가능한 속성도 조금씩 다름
+  	 -->
+  	<select id="login" parameterType="Member" resultMap="member_rm">
   		SELECT MEMBER_NO, MEMBER_EMAIL, MEMBER_NICKNAME, MEMBER_PW,
 			MEMBER_TEL, MEMBER_ADDR, PROFILE_IMG, AUTHORITY,
 			TO_CHAR(ENROLL_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') AS ENROLL_DATE 
 		FROM "MEMBER"
 		WHERE MEMBER_DEL_FL = 'N'
 		AND MEMBER_EMAIL = #{memberEmail}
-  	</select>
-  	
-  	<insert id="signUp" parameterType="Member">
-  		INSERT INTO "MEMBER"
-  		VALUES (SEQ_MEMBER_NO.NEXTVAL
-  			, #{memberEmail}
-  			, #{memberPw}
-  			, #{memberNickname}
-  			, #{memberTel}
-  			, #{memberAddress}
-  			, NULL, DEFAULT, DEFAULT, DEFAULT)
-  	</insert>
-  	
-  	<update id="update">
-  		
-  	</update>
+	</select>
+	
+	
+	<insert id="signUp" parameterType="Member">
+		INSERT INTO "MEMBER"
+		VALUES(SEQ_MEMBER_NO.NEXTVAL
+			, #{memberEmail}
+			, #{memberPw}
+			, #{memberNickname}
+			, #{memberTel}
+			, #{memberAddress}
+			, NULL, DEFAULT, DEFAULT, DEFAULT)
+	</insert>
+	
+	
+	
+	
+	
+	
+	
+  
 </mapper>

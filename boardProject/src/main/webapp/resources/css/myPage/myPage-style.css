@@ -206,7 +206,7 @@ form[name='myPageFrm']{
 form[name='myPage-frm']{position: relative;}
 
 #deleteImage{
-    <!--position: absolute;-->
+    position: absolute;
     top: 0px;
     right: 240px;
     cursor: pointer;
@@ -240,4 +240,8 @@ form[name='myPage-frm']{position: relative;}
     background-color: #455ba8;
     color : white;
     margin-left: 2px;
+}
+
+#profileFrm {
+    position: relative;
 }

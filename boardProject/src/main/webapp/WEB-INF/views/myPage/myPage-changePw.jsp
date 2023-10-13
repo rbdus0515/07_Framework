@@ -16,9 +16,6 @@
 
 </head>
 <body>
-
-<!-- 암호화 거쳐야함!!!!!!!! -->
-
     <main>
        <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 

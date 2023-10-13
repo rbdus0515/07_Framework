@@ -19,6 +19,5 @@ public class Member {
 	private String profileImage;
 	private String enrollDate;
 	private String memberDeleteFlag;
-	private int authority;
-
+	private int authority; // 1 일반 2 관리자
 }

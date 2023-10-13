@@ -11,7 +11,8 @@ import edu.kh.project.member.model.dto.Member;
 
 // 3. Spring AOP 사용을 위해서
 // -> AOP는 spring-proxy를 이용해서 동작하는데
-// 	이 때 Service 인터페이스가 필요하다!
+//	이 때 Service 인터페이스가 필요하다!
+
 public interface MemberService {
 
 	/** 로그인 서비스
@@ -20,10 +21,10 @@ public interface MemberService {
 	 */
 	Member login(Member inputMember);
 
-	/** 회원가입 서비스
+	/** 회원 가입 서비스
 	 * @param inputMember
-	 * @return
+	 * @return result
 	 */
 	int signUp(Member inputMember);
-
+	
 }

@@ -16,19 +16,16 @@ public interface AjaxService {
 	 */
 	Member selectMember(String email);
 
-	
 	/** 이메일 중복검사
-	 * @return
+	 * @param email
+	 * @return count
 	 */
 	int checkEmail(String email);
 
 	/** 닉네임 중복검사
 	 * @param nickname
-	 * @return
+	 * @return count
 	 */
 	int checkNickname(String nickname);
-	
-	
-	
 
 }
