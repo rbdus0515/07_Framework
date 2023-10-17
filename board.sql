@@ -237,6 +237,31 @@ VALUES(SEQ_IMG_NO.NEXTVAL, '/resources/images/board/',
 COMMIT;
 
 ---------------------------------------------------------------------------
+
+SELECT COUNT(*)
+FROM BOARD
+WHERE BOARD_DEL_FL = 'N'
+AND BOARD_CODE = 1;
+
+
+
+-- 특정 게시판의 목록 조회
+-- 1. 최신 순서
+-- 2. 1page (1~10행)조회
+-- 3. 삭제된 글 제외
+
+-- 마이바티스
+--> RowBounds 객체 이용
+SELECT BOARD_NO, BOARD_TITLE, MEMBER_NICKNAME,
+	TO_CHAR(B_CREATE_DATE, 'YYYY-MM-DD') B_CREATE_DATE,
+	READ_COUNT
+FROM BOARD
+JOIN "MEMBER" USING(MEMBER_NO)
+WHERE BOARD_DEL_FL = 'N'
+AND BOARD_CODE = 1
+ORDER BY BOARD_NO DESC;
+
+--------------------------------------------------------------
 DROP TABLE BOARD;
 DROP TABLE BOARD_IMG;
 DROP TABLE BOARD_LIKE;

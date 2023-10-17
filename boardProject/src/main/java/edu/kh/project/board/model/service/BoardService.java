@@ -6,5 +6,7 @@ import java.util.Map;
 public interface BoardService {
 
 	List<Map<String, Object>> selectBoardList();
+
+	Map<String, Object> selectBoardList(int boardCode, int cp);
 	
 }
