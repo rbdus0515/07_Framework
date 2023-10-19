@@ -6,7 +6,7 @@
 <c:set var="pagination" value="${map.pagination}" />
 <c:set var="boardList" value="${map.boardList}" />
 
-<c:set var="boardName" value="${boardTypeList[boardCode-1.BOARD_NAME]}"/>
+<c:set var="boardName" value="${boardTypeList[boardCode-1].BOARD_NAME}"/>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -108,12 +108,10 @@
                     <!-- 특정 페이지로 이동 -->
                     <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
                     	<c:choose>
-		                    <!-- 현재 보고있는 페이지 -->
                     		<c:when test="${i == pagination.currentPage}">
                     			<li><a class="current">${i}</a></li>
                     		</c:when>
                     		
-		                    <!-- 현재 페이지를 제외한 나머지 -->
                     		<c:otherwise>
 			                    <li><a href="/board/${boardCode}?cp=${i}">${i}</a></li>
                     		</c:otherwise>
