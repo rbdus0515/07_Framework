@@ -12,13 +12,6 @@ public interface MyPageService {
 	 */
 	int updateInfo(Member updateMember);
 
-	/** 프로필 이미지 수정 서비스
-	 * @param profileImage
-	 * @param webPath
-	 * @param filePath
-	 * @param loginMember
-	 * @return
-	 */
 	int updateProfile(MultipartFile profileImage, String webPath, String filePath, Member loginMember) throws Exception;
 
 }

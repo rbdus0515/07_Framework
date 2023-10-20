@@ -11,26 +11,30 @@ import org.springframework.stereotype.Repository;
 import edu.kh.project.board.model.dto.Board;
 import edu.kh.project.board.model.dto.Pagination;
 
+/**
+ * @author user1
+ *
+ */
 @Repository
 public class BoardDAO {
-	
+
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-
+	
+	
 	/** 게시판 종류 목록 조회
 	 * @return
 	 */
-	public List<Map<String, Object>> selectBoardList() {
+	public List<Map<String, Object>> selectBoardTypeList() {
 		return sqlSession.selectList("boardMapper.selectBoardTypeList");
 	}
 
-	
+
 	/** 특정 게시판의 삭제되지 않은 게시글 수 조회
 	 * @param boardCode
 	 * @return listCount
 	 */
 	public int getListCount(int boardCode) {
-		
 		return sqlSession.selectOne("boardMapper.getListCount", boardCode);
 	}
 
@@ -47,24 +51,23 @@ public class BoardDAO {
 		// - offset 만큼 건너뛰고
 		// 그 다음 지정된 행 개수(limit) 만큼 조회
 		
-		// 1. offset 계산
-		int offset
-				= (pagination.getCurrentPage() - 1) * pagination.getLimit();
+		// 1) offset 계산
+		int offset 
+			= (pagination.getCurrentPage() - 1) * pagination.getLimit();
 		
-		// 2. RowBounds 객체 생성
+		// 2) RowBounds 객체 생성
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 		
-		// 3. selectList("namespace.id", 파라미터, RowBounds) 호출
+		// 3) selectList("namespace.id", 파라미터, RowBounds) 호출
 		return sqlSession.selectList("boardMapper.selectBoardList", boardCode, rowBounds);
 	}
 
-
+	
 	/** 게시글 상세 조회
 	 * @param map
 	 * @return board
 	 */
 	public Board selectBoard(Map<String, Object> map) {
-		
 		return sqlSession.selectOne("boardMapper.selectBoard", map);
 	}
 
@@ -74,7 +77,6 @@ public class BoardDAO {
 	 * @return result
 	 */
 	public int boardLikeCheck(Map<String, Object> map) {
-		
 		return sqlSession.selectOne("boardMapper.boardLikeCheck", map);
 	}
 
@@ -87,52 +89,31 @@ public class BoardDAO {
 		return sqlSession.update("boardMapper.updateReadCount", boardNo);
 	}
 
-
-	/** 좋아요 테이블 (추가) DAO
+	
+	/** 좋아요 테이블 삽입
 	 * @param paramMap
-	 * @return result
+	 * @return
 	 */
 	public int insertBoardLike(Map<String, Integer> paramMap) {
 		return sqlSession.insert("boardMapper.insertBoardLike", paramMap);
 	}
 
 
-	/** 좋아요 (삭제) DAO
+	/** 좋아요 삭제
 	 * @param paramMap
-	 * @return result
+	 * @return
 	 */
 	public int deleteBoardLike(Map<String, Integer> paramMap) {
 		return sqlSession.delete("boardMapper.deleteBoardLike", paramMap);
 	}
 
 
-	/** 좋아요 (합계) DAO
+	/** 좋아요 개수 조회
 	 * @param integer
-	 * @return result
+	 * @return
 	 */
 	public int countBoardLike(Integer boardNo) {
 		return sqlSession.selectOne("boardMapper.countBoardLike", boardNo);
 	}
 
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

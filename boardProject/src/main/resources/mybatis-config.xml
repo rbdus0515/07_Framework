@@ -20,7 +20,6 @@
 		<typeAlias type="edu.kh.project.board.model.dto.Board" alias="Board"/>
 		<typeAlias type="edu.kh.project.board.model.dto.BoardImage" alias="BoardImage"/>
 		<typeAlias type="edu.kh.project.board.model.dto.Comment" alias="Comment"/>
-		
 	</typeAliases>
 
 

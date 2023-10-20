@@ -18,6 +18,7 @@ public class Pagination {
 	
 	
 	public Pagination(int listCount, int currentPage) {
+		
 		this.listCount = listCount;
 		this.currentPage = currentPage;
 		

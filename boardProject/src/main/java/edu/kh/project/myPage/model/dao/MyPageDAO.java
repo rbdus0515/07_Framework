@@ -17,6 +17,7 @@ public class MyPageDAO {
 		return sqlSession.update("myPageMapper.updateInfo", updateMember);
 	}
 
+	
 	/** 프로필 이미지 수정
 	 * @param loginMember
 	 * @return result

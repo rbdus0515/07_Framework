@@ -13,27 +13,21 @@ import org.springframework.web.servlet.ModelAndView;
 
 import edu.kh.project.board.model.service.BoardService;
 
-
 // Interceptor : 요청/응답을 가로채는 객체
-// Client <-> (Filter) <-> Dispatcher Servlet <-> (Interceptor) <-> Controller
-
-// Filter = 전반적으로 쓰일 보안,인증,인가 관련 작업 / 문자열 인코딩
-// Interceptor = 요청에 대한 데이터 가공 / 세부적으로 쓰일 보안,인증
+// Client <-> (Filter) <->  Dispatcher Servlet <-> (Interceptor) <-> Controller
 
 
 public class BoardTypeInterceptor implements HandlerInterceptor {
-
-	// alt + shift + s -> 오버라이드 임플리먼트 메서드
 	
-	/*
-	 * preHanddle : 전처리	Dispatcher Servlet -> Controller 사이
-	 * postHandle : 후처리	Controller -> Dispatcher Servlet 사이
-	 * afterCompletion : 뷰 완성 후	View Resolver -> Dispatcher Servlet 사이
-	 */
+	/* preHandle : 전처리    Dispatcher Servlet -> Controller 사이
+	 * postHandle : 후처리   Controller -> Dispathcer Servlet 사이
+	 * afterCompletion: 뷰 완성 후  View Resolver -> Dispathcher Servlet 사이
+	 * */
 	
 	@Autowired
 	private BoardService service;
 	
+
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
@@ -47,15 +41,16 @@ public class BoardTypeInterceptor implements HandlerInterceptor {
 			
 			// 조회 서비스 호출
 			System.out.println("BOARD_TYPE 조회 서비스 호출");
-			List<Map<String, Object>> boardTypeList
-				= service.selectBoardList();
 			
-			System.out.println("boardTypeList : " + boardTypeList);
+			List<Map<String, Object>> boardTypeList 
+				= service.selectBoardTypeList();
+			
+			System.out.println("boardTypeList::" + boardTypeList);
+			
 			
 			// application scope 세팅
 			application.setAttribute("boardTypeList", boardTypeList);
-		
-		} else {
+			
 			
 		}
 		
@@ -76,6 +71,5 @@ public class BoardTypeInterceptor implements HandlerInterceptor {
 		HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
 	}
 
-	
 	
 }

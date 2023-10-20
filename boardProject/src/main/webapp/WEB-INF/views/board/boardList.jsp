@@ -8,6 +8,7 @@
 
 <c:set var="boardName" value="${boardTypeList[boardCode-1].BOARD_NAME}"/>
 
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -45,28 +46,28 @@
 
                     <tbody>
                     	<c:choose>
-		                    <%-- 조회된 게시글 목록이 비어있거나 null인 경우  --%>
+                    		<%-- 조회된 게시글 목록이 비어있거나 null 경우 --%>
                     		<c:when test="${empty boardList}">
-		                   		<!-- 게시글 목록 조회 결과가 비어있다면 -->
+                    			<!-- 게시글 목록 조회 결과가 비어있다면 -->
 		                         <tr>
 		                             <th colspan="6">게시글이 존재하지 않습니다.</th>
 		                         </tr>
                     		</c:when>
                     		
-                    		
                     		<c:otherwise>
-								<!-- 게시글 목록 조회 결과가 있다면 -->
+                    		
                     			<c:forEach items="${boardList}" var="board">
-			                        <tr>
+                    				<!-- 게시글 목록 조회 결과가 있다면 -->
+                        			<tr>
 			                            <td>${board.boardNo}</td>
 			                            <td> 
 			                            
 			                            	<%-- 썸네일이 있을 경우 --%>
 			                            	<c:if test="${not empty board.thumbnail}">
 				                                <img class="list-thumbnail" src="${board.thumbnail}">
-				                            </c:if>
-				                            
-				                            <%-- ${boardCode} : @Pathvariable로 request scope에 추가된 값 --%>
+			                            	</c:if>
+			
+											<%-- ${boardCode} : @Pathvariable 로 request scope에 추가된 값 --%>
 			                                <a href="/board/${boardCode}/${board.boardNo}?cp=${pagination.currentPage}">${board.boardTitle}</a>   
 			                                [${board.commentCount}]                        
 			                            </td>
@@ -75,11 +76,13 @@
 			                            <td>${board.readCount}</td>
 			                            <td>${board.likeCount}</td>
 			                        </tr>
+			                        
                     			</c:forEach>
+                    			
                     		</c:otherwise>
                     	</c:choose>
                     
-
+						
                     </tbody>
                 </table>
             </div>
@@ -88,7 +91,9 @@
             <div class="btn-area">
 
 				<!-- 로그인 상태일 경우 글쓰기 버튼 노출 -->
-                <button id="insertBtn">글쓰기</button>                     
+				<c:if test="${not empty loginMember}">
+	                <button id="insertBtn">글쓰기</button>                     
+				</c:if>
 
             </div>
 
@@ -108,16 +113,17 @@
                     <!-- 특정 페이지로 이동 -->
                     <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
                     	<c:choose>
+                    		<%-- 현재 보고있는 페이지 --%>
                     		<c:when test="${i == pagination.currentPage}">
                     			<li><a class="current">${i}</a></li>
                     		</c:when>
                     		
+                    		<%-- 현재 페이지를 제외한 나머지 --%>
                     		<c:otherwise>
-			                    <li><a href="/board/${boardCode}?cp=${i}">${i}</a></li>
+                    			<li><a href="/board/${boardCode}?cp=${i}">${i}</a></li>
                     		</c:otherwise>
                     	</c:choose>
                     </c:forEach>
-                    
                     
                     <!-- 다음 목록 시작 번호로 이동 -->
                     <li><a href="/board/${boardCode}?cp=${pagination.nextPage}">&gt;</a></li>
@@ -156,6 +162,10 @@
 
 
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-
+    
+ 	<script src="/resources/js/board/boardList.js"></script>
+    
+    
+    
 </body>
 </html>
