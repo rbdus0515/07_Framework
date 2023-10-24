@@ -23,6 +23,8 @@ C:\kyu\workspace\7_Framework\boardProject\src\main\java\edu\kh\project\board\mod
 C:\kyu\workspace\7_Framework\boardProject\src\main\java\edu\kh\project\board\model\dto\Comment.java
 C:\kyu\workspace\7_Framework\boardProject\src\main\java\edu\kh\project\common\filter\LoginFilter.java
 C:\kyu\workspace\7_Framework\boardProject\src\main\java\edu\kh\project\common\utility\Util.java
+C:\kyu\workspace\7_Framework\boardProject\src\main\java\edu\kh\project\board\model\service\CommentService.java
+C:\kyu\workspace\7_Framework\boardProject\src\main\java\edu\kh\project\board\controller\CommentController.java
 C:\kyu\workspace\7_Framework\boardProject\src\main\java\edu\kh\project\board\model\exception\ImageDeleteException.java
 C:\kyu\workspace\7_Framework\boardProject\src\main\java\edu\kh\project\board\model\service\BoardService2.java
 C:\kyu\workspace\7_Framework\boardProject\src\main\java\edu\kh\project\member\model\service\AjaxServiceImpl.java
@@ -30,6 +32,8 @@ C:\kyu\workspace\7_Framework\boardProject\src\main\java\edu\kh\project\common\in
 C:\kyu\workspace\7_Framework\boardProject\src\main\java\edu\kh\project\member\controller\AjaxController.java
 C:\kyu\workspace\7_Framework\boardProject\src\main\java\edu\kh\project\member\model\service\AjaxService.java
 C:\kyu\workspace\7_Framework\boardProject\src\main\java\edu\kh\project\myPage\model\service\MyPageServiceImpl.java
+C:\kyu\workspace\7_Framework\boardProject\src\main\java\edu\kh\project\board\model\dao\CommentDAO.java
+C:\kyu\workspace\7_Framework\boardProject\src\main\java\edu\kh\project\board\model\service\CommentServiceImpl.java
 C:\kyu\workspace\7_Framework\boardProject\src\main\java\edu\kh\project\board\model\dto\BoardImage.java
 C:\kyu\workspace\7_Framework\boardProject\src\main\java\edu\kh\project\myPage\model\dao\MyPageDAO.java
 C:\kyu\workspace\7_Framework\boardProject\src\main\java\edu\kh\project\main\controller\MainController.java

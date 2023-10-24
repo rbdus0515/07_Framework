@@ -145,7 +145,7 @@ public class MyPageController {
 		
 		// 실제로 이미지 파일이 저장되어야하는 서버컴퓨터 경로
 		String filePath = session.getServletContext().getRealPath(webPath);
-		// C:\workspace\6_Framework\boardProject\src\main\webapp\resources\images\member
+		// C:\workspace\7_Framework\boardProject\src\main\webapp\resources\images\member
 		
 		
 		// 프로필 이미지 수정 서비스 호출

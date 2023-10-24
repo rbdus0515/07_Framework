@@ -147,13 +147,17 @@
   	
   	<!-- 특정 게시글 댓글 조회(바뀔 예정) -->
   	<select id="selectCommentList" resultMap="comment_rm">
-  		SELECT COMMENT_NO, COMMENT_CONTENT,
+  		SELECT LEVEL, C.* FROM
+			(SELECT COMMENT_NO, COMMENT_CONTENT,
 			TO_CHAR(C_CREATE_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') C_CREATE_DATE,
 			BOARD_NO, MEMBER_NO, MEMBER_NICKNAME, PROFILE_IMG, PARENT_NO, COMMENT_DEL_FL
-		FROM "COMMENT"
-		JOIN MEMBER USING(MEMBER_NO)
-		WHERE BOARD_NO = #{boardNo}
-		ORDER BY COMMENT_NO
+			FROM "COMMENT"
+			JOIN MEMBER USING(MEMBER_NO)
+			WHERE BOARD_NO = #{boardNo}) C
+		WHERE COMMENT_DEL_FL = 'N'
+		START WITH PARENT_NO IS NULL
+		CONNECT BY PRIOR COMMENT_NO = PARENT_NO
+		ORDER SIBLINGS BY COMMENT_NO
   	</select>
   	
   	
@@ -293,14 +297,30 @@
 		WHERE BOARD_NO = #{boardNo}
   	</update>
   	
+  	<!-- 댓글 목록 조회 -->
+  	<select id="selectComment" parameterType="list">
+  		SELECT *
+  		FROM "COMMENT"
+  		WHERE #{boardNo}
+  	</select>
   	
-  	
-  	
-  	
-  	
-  	
-  	
-  	
+  	<!-- 댓글 등록 -->
+  	<insert id="insertComment" parameterType="Comment" useGeneratedKeys="true">
+
+		<selectKey order="BEFORE" resultType="_int" keyProperty="commentNo">
+			SELECT SEQ_COMMENT_NO.NEXTVAL FROM DUAL
+		</selectKey>
+		
+			INSERT INTO COMMENT
+			VALUES(	#{commentNo},
+					#{comment_content},
+					DEFAULT,
+					DEFAULT,
+					#{boardNo},
+					#{memberNo},
+					#{parentNo} )
+  		
+  	</insert>
   	
   	
   	
