@@ -297,29 +297,21 @@
 		WHERE BOARD_NO = #{boardNo}
   	</update>
   	
-  	<!-- 댓글 목록 조회 -->
-  	<select id="selectComment" parameterType="list">
-  		SELECT *
-  		FROM "COMMENT"
-  		WHERE #{boardNo}
-  	</select>
-  	
   	<!-- 댓글 등록 -->
   	<insert id="insertComment" parameterType="Comment" useGeneratedKeys="true">
-
-		<selectKey order="BEFORE" resultType="_int" keyProperty="commentNo">
-			SELECT SEQ_COMMENT_NO.NEXTVAL FROM DUAL
-		</selectKey>
-		
 			INSERT INTO COMMENT
-			VALUES(	#{commentNo},
+			VALUES(SEQ_COMMENT_NO.NEXTVAL,
 					#{comment_content},
 					DEFAULT,
 					DEFAULT,
 					#{boardNo},
 					#{memberNo},
-					#{parentNo} )
-  		
+					<!-- 동적 sql : if문 -->
+					<!-- 부모 댓글 -->
+					<if test="parentNo == 0"> NULL </if>
+					<!-- 자식 댓글 -->
+					<if test="parentNo != 0"> #{parentNo} </if>
+					 )
   	</insert>
   	
   	

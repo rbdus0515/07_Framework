@@ -34,7 +34,7 @@
 	
 	                <!-- 버튼 영역 -->
 	                <div class="comment-btn-area">
-	                    <button>답글</button>   
+	                    <button onclick="showInsertComment(${comment.commentNo}, this)">답글</button>   
 	                        
 	                    <!-- 로그인 회원과 댓글 작성자가 같은 경우 -->  
 	                    <c:if test="${loginMember.memberNo == comment.memberNo}">

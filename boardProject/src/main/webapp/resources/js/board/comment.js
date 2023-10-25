@@ -143,8 +143,18 @@ addComment.addEventListener("click", e => { // 댓글 등록 버튼이 클릭이
     }
 
     // 3) AJAX를 이용해서 댓글 내용 DB에 저장(INSERT)
-    fetch("/comment/insert?boardNo=" + boardNo)
-    .then(response => response.json())
+    const data = {
+        "commentContent" : commentContent.value,
+        "memberNo" : loginMemberNo,
+        "boardNo" : boardNo
+    };
+
+    fetch("/comment" , {
+        method : "POST",
+        headers : {"Content-Type" : "application/json"},
+        body : JSON.stringify(data) // JS 객체 -> JSON
+    })
+    .then(resp => resp.text())
     .then(result => {
         if(result > 0){ // 등록 성공
             alert("댓글이 등록되었습니다.");
@@ -168,8 +178,8 @@ function deleteComment(commentNo){
 
     if( confirm("정말로 삭제 하시겠습니까?") ){
 
-        fetch()
-        .then()
+        fetch("/comment?commentNo=" + commentNo)
+        .then(response => response.json())
         .then(result => {
             if(result > 0){
                 alert("삭제되었습니다");
@@ -291,8 +301,18 @@ function updateComment(commentNo, btn){
     // 새로 작성된 댓글 내용 얻어오기
     const commentContent = btn.parentElement.previousElementSibling.value;
 
-    fetch()
-    .then()
+    const data = {
+        "commentContent" : commentContent.value,
+        "memberNo" : loginMemberNo,
+        "boardNo" : boardNo
+    };
+
+    fetch("/comment" , {
+        method : "POST",
+        headers : {"Content-Type" : "application/json"},
+        body : JSON.stringify(data) // JS 객체 -> JSON
+    })
+    .then(resp => resp.text())
     .then(result => {
         if(result > 0){
             alert("댓글이 수정되었습니다.");
@@ -389,10 +409,19 @@ function insertChildComment(parentNo, btn){
         return;
     }
 
+    const data = {
+        "commentContent" : commentContent,
+        "memberNo" : loginMemberNo,
+        "boardNo" : boardNo,
+        "parentNo" : parentNo
+    };
 
-
-    fetch()
-    .then()
+    fetch("/comment" , {
+        method : "POST",
+        headers : {"Content-Type" : "application/json"},
+        body : JSON.stringify(data) // JS 객체 -> JSON
+    })
+    .then(resp => resp.text())
     .then(result => {
         if(result > 0){ // 등록 성공
             alert("답글이 등록되었습니다.");

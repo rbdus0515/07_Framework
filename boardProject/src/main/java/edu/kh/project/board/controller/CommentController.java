@@ -7,6 +7,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
@@ -32,40 +35,25 @@ public class CommentController {
 		// 비동기 시 return : 값 자체
 	}
 	
-	// 댓글 삽입
-	@GetMapping(value = "/{boardCode}/{boardNo}/comment/insert")
-	public String insertComment(
-					@PathVariable("boardNo") int boardNo,
-					@PathVariable("boardCode") int boardCode,
-					Comment comment,
-					@SessionAttribute("loginMember") Member loginMember
-					) {
+	// 댓글 등록
+	@PostMapping("/comment")
+	public int insertComment(@RequestBody Comment comment) {
+						// 요청 데이터(JSON)
+						// HttpMessageConverter가 해석 -> Java 객체(comment)에 대입
 		
-		comment.setMemberNo(loginMember.getMemberNo());
-		
-		comment.setBoardNo(boardNo);
-		
-		int commentNo = service.insertComment(comment);
-		
-		String path = "redirect:";
-		
-		if(commentNo > 0) {
-			path += "/board/" + boardCode + "/" + boardNo;
-		} else {
-			path += "insert";
-		}
-		
-		return path;
+		return service.insertComment(comment);
 	}
 	
 	// 댓글 삭제
-	public String delete() {
-		return null;
+	@GetMapping("/comment/delete")
+	public int deleteComment(int commentNo) {
+		return service.deleteComment(commentNo);
 	}
 	
 	// 댓글 수정
-	public String update() {
-		return null;
+	@PostMapping("/comment/update")
+	public int updateComment(@RequestParam Comment comment) {
+		return service.updateComment(comment);
 	}
 	
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import edu.kh.project.board.model.dao.CommentDAO;
 import edu.kh.project.board.model.dto.Comment;
@@ -16,7 +17,7 @@ public class CommentServiceImpl implements CommentService{
 	@Autowired
 	private CommentDAO dao;
 	
-	// 댓글 조회 서비스
+	// 댓글 목록 조회 서비스
 	@Override
 	public List<Comment> selectComment(int boardNo) {
 		
@@ -24,14 +25,25 @@ public class CommentServiceImpl implements CommentService{
 	}
 
 	// 댓글 등록 서비스
+	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int insertComment(Comment comment) {
 		
 		comment.setCommentContent(Util.XSSHandling(comment.getCommentContent()));
 		
-		int commentNo = dao.insertComment(comment);
-		
-		return commentNo;
+		return dao.insertComment(comment);
+	}
+
+	// 댓글 삭제
+	@Override
+	public int deleteComment(int commentNo) {
+		return dao.deleteComment(commentNo);
+	}
+
+	// 댓글 수정
+	@Override
+	public int updateComment(Comment comment) {
+		return dao.updateComment(comment);
 	}
 
 }

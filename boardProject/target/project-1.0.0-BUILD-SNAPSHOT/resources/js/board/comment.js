@@ -143,8 +143,18 @@ addComment.addEventListener("click", e => { // 댓글 등록 버튼이 클릭이
     }
 
     // 3) AJAX를 이용해서 댓글 내용 DB에 저장(INSERT)
-    fetch("/{boardCode:[0-9]+}/insert?boardNo=" + boardNo)
-    .then(response => response.json())
+    const data = {
+        "commentContent" : commentContent.value,
+        "memberNo" : loginMemberNo,
+        "boardNo" : boardNo
+    };
+
+    fetch("/comment" , {
+        method : "POST",
+        headers : {"Content-Type" : "application/json"},
+        body : JSON.stringify(data) // JS 객체 -> JSON
+    })
+    .then(resp => resp.text())
     .then(result => {
         if(result > 0){ // 등록 성공
             alert("댓글이 등록되었습니다.");
@@ -389,10 +399,19 @@ function insertChildComment(parentNo, btn){
         return;
     }
 
+    const data = {
+        "commentContent" : commentContent,
+        "memberNo" : loginMemberNo,
+        "boardNo" : boardNo,
+        "parentNo" : parentNo
+    };
 
-
-    fetch()
-    .then()
+    fetch("/comment" , {
+        method : "POST",
+        headers : {"Content-Type" : "application/json"},
+        body : JSON.stringify(data) // JS 객체 -> JSON
+    })
+    .then(resp => resp.text())
     .then(result => {
         if(result > 0){ // 등록 성공
             alert("답글이 등록되었습니다.");
