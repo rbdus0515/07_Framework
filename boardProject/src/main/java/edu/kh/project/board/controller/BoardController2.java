@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -31,7 +32,7 @@ import edu.kh.project.member.model.dto.Member;
 public class BoardController2 {
 
 	@Autowired
-	private BoardService2 service; // 삽입, 수정, 삭제
+	private BoardService2 service; // 삽입,수정,삭제
 	
 	@Autowired
 	private BoardService boardService; // 목록, 상세 조회
@@ -111,7 +112,8 @@ public class BoardController2 {
 	public String boardUpdate(
 			@PathVariable("boardCode") int boardCode,
 			@PathVariable("boardNo") int boardNo,
-			Model model // Model : 데이터 전달용 객체 (기본 scope: request)
+			Model model
+			// Model : 데이터 전달용 객체 (기본 scope: request)
 			) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -123,6 +125,7 @@ public class BoardController2 {
 		model.addAttribute("board", board);
 		
 		return "board/boardUpdate";
+		
 	}
 	
 	// 게시글 수정
@@ -131,34 +134,35 @@ public class BoardController2 {
 			Board board, // 커맨드 객체(name == 필드 경우 필드에 파라미터 세팅)
 			@PathVariable("boardCode") int boardCode,
 			@PathVariable("boardNo") int boardNo,
-			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp, // 쿼리스트링 유지
-			@RequestParam(value = "images", required = false) List<MultipartFile> images, // 업로드된 파일 리스트
-			@RequestParam(value = "deleteList", required = false) String deleteList, // 삭제할 이미지 순서
-			HttpSession session, // 서버 파일 저장 경로 얻어올 용도
-			RedirectAttributes ra // 리다이렉트시 값 전달용(message)
+			@RequestParam(value="cp", required = false, defaultValue = "1") int cp, // 쿼리스트링 유지
+			@RequestParam(value="images", required = false) List<MultipartFile> images, // 업로드된 파일 리스트
+			@RequestParam(value="deleteList", required = false) String deleteList, // 삭제할 이미지 순서
+			HttpSession session,  // 서버 파일 저장 경로 얻어올 용도
+			RedirectAttributes ra // 리다이렉트 시 값 전달용(message)
 			) throws IllegalStateException, IOException {
 		
-		// 1. boardCode, boardNo를 커맨드 객체(board)에 세팅
+		// 1) boardCode, boardNo를 커맨드 객체(board)에 세팅
 		board.setBoardCode(boardCode);
 		board.setBoardNo(boardNo);
 		
 		// board ( boardCode, boardNo, boardTitle, boardContent )
 		
-		// 2. 이미지 서버 저장경로, 웹 접근 경로
+		// 2) 이미지 서버 저장경로, 웹 접근 경로
 		String webPath = "/resources/images/board/";
 		String filePath = session.getServletContext().getRealPath(webPath);
 		
-		// 3. 게시글 수정 서비스 호출
-		int rowCount = service.boardUpdate(board, images, webPath, filePath, deleteList);
+		// 3) 게시글 수정 서비스 호출
+		int rowCount = service.boardUpdate(board, images, webPath, filePath, deleteList); 
 		
-		// 4. 결과에 따라 message, path 설정
+		// 4) 결과에 따라 message, path 설정
 		String message = null;
 		String path = "redirect:";
 		
+		
 		if(rowCount > 0) {
-			message = "게시글이 수정되었습니다.";
-			path += "/board/" + boardCode + "/" + boardNo + "?cp=" + cp;
-		} else {
+			message = "게시글이 수정되었습니다";
+			path += "/board/" + boardCode + "/" +boardNo + "?cp=" + cp;
+		}else {
 			message = "게시글 수정 실패";
 			path += "update";
 		}
@@ -172,41 +176,32 @@ public class BoardController2 {
 	// 게시글 삭제
 	@GetMapping("/{boardCode}/{boardNo}/delete")
 	public String boardDelete(
-			@PathVariable("boardCode") int boardCode,
-			@PathVariable("boardNo") int boardNo
-			) {
-	
-		// boardCode, boardNo 서비스로 넘겨야함
-		// map으로 담아서 보내기
+		 @PathVariable("boardCode") int boardCode
+		,@PathVariable("boardNo") int boardNo
+		,RedirectAttributes ra) {
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("boardCode", boardCode);
 		map.put("boardNo", boardNo);
 		
-		int result = service.deleteBoard(map);
 		
-		String message = null;
+		int result = service.boardDelete(map);
+		
 		String path = "redirect:";
-
-		// 결과값이 > 0 라면
-		// "삭제되었습니다."
-		// /board/{boardCode}
+		String message = null;
 		if(result > 0) {
-			
-			message = "게시글이 삭제되었습니다.";
-			path += "/board/" + boardCode;
-			
-		} else {
-			// else
-			// "삭제 실패"
-			// /board/{boardCode}/{boardNo}
-			message = "게시글 삭제 실패";
-			path += "delete";
+			message = "삭제 되었습니다.";
+			path += "/board/"+ boardCode;
+		}else {
+			message = "삭제 실패";
+			path += "/board/" + boardCode + "/" + boardNo;
 		}
-		
+
+		ra.addFlashAttribute("message", message);
 		
 		return path;
 	}
-	
+
 	
 	
 	
@@ -215,13 +210,3 @@ public class BoardController2 {
 	
 	
 }
-
-
-
-
-
-
-
-
-
-

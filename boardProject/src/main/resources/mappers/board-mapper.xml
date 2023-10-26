@@ -145,6 +145,7 @@
 		ORDER BY IMG_ORDER
   	</select>
   	
+  	
   	<!-- 특정 게시글 댓글 조회(바뀔 예정) -->
   	<select id="selectCommentList" resultMap="comment_rm">
   		SELECT LEVEL, C.* FROM
@@ -159,6 +160,7 @@
 		CONNECT BY PRIOR COMMENT_NO = PARENT_NO
 		ORDER SIBLINGS BY COMMENT_NO
   	</select>
+  	
   	
   	
   	<!-- 좋아요 여부 확인 -->
@@ -255,6 +257,7 @@
   		) A
   	</insert>
   	
+  	
   	<!-- 게시글 수정 -->
   	<update id="boardUpdate">
   		UPDATE "BOARD" SET
@@ -265,12 +268,14 @@
   		AND BOARD_NO = #{boardNo}
   	</update>
   	
+  	
   	<!-- 이미지 삭제 -->
   	<delete id="imageDelete">
   		DELETE FROM "BOARD_IMG"
   		WHERE BOARD_NO = #{boardNo}
   		AND IMG_ORDER IN ( ${deleteList} )
   	</delete>
+  	
   	
   	<!-- 이미지 수정 -->
 	<update id="imageUpdate">
@@ -281,7 +286,7 @@
 		WHERE BOARD_NO = #{boardNo}
 		AND IMG_ORDER = #{imageOrder}
 	</update>
-
+  	
   	<!-- 이미지 삽입 -->
 	<insert id="imageInsert">
 		INSERT INTO "BOARD_IMG"
@@ -290,40 +295,16 @@
 		)
 	</insert>
   	
-  	<!-- 게시물 삭제 -->
-  	<update id="deleteBoard">
-  		UPDATE "BOARD"
-		SET BOARD_DEL_FL = 'Y'
-		WHERE BOARD_NO = #{boardNo}
-  	</update>
   	
-  	<!-- 댓글 등록 -->
-  	<insert id="insertComment" parameterType="Comment" useGeneratedKeys="true">
-			INSERT INTO COMMENT
-			VALUES(SEQ_COMMENT_NO.NEXTVAL,
-					#{comment_content},
-					DEFAULT,
-					DEFAULT,
-					#{boardNo},
-					#{memberNo},
-					<!-- 동적 sql : if문 -->
-					<!-- 부모 댓글 -->
-					<if test="parentNo == 0"> NULL </if>
-					<!-- 자식 댓글 -->
-					<if test="parentNo != 0"> #{parentNo} </if>
-					 )
-  	</insert>
-  	
-  	
-  	
-  	
+  	<!-- 게시글 삭제 -->
+ 	<update id="boardDelete">
+		UPDATE "BOARD" SET
+		BOARD_DEL_FL = 'Y'
+		WHERE BOARD_CODE = #{boardCode}
+		AND BOARD_NO = #{boardNo}
+	</update>
   	
   	
   	
   
 </mapper>
-
-
-
-
-

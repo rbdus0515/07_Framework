@@ -39,11 +39,11 @@ public class BoardDAO2 {
 		return sqlSession.insert("boardMapper.insertImageList", uploadList);
 	}
 
-	/** 게시글 수정
+	/** 게시글 수정 
 	 * @param board
 	 * @return rowCount
 	 */
-	public int boardUdate(Board board) {
+	public int boardUpdate(Board board) {
 		return sqlSession.update("boardMapper.boardUpdate", board);
 	}
 
@@ -65,17 +65,19 @@ public class BoardDAO2 {
 
 	/** 이미지 삽입
 	 * @param img
-	 * @return
+	 * @return rowCount
 	 */
 	public int imageInsert(BoardImage img) {
 		return sqlSession.insert("boardMapper.imageInsert", img);
 	}
+	
 
-	/** 게시물 삭제
+	/** 게시글 삭제
 	 * @param map
 	 * @return result
 	 */
-	public int deleteBoard(Map<String, Object> map) {
-		return sqlSession.update("boardMapper.deleteBoard", map);
+	public int boardDelete(Map<String, Object> map) {
+		return sqlSession.update("boardMapper.boardDelete", map);
 	}
+	
 }

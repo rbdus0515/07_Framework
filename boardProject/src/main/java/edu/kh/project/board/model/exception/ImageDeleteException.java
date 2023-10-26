@@ -11,5 +11,4 @@ public class ImageDeleteException extends RuntimeException{
 	}
 	
 	
-
 }

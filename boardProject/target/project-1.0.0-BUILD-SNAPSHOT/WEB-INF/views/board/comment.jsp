@@ -9,7 +9,8 @@
         
         	<c:forEach items="${board.commentList}" var="comment">
 	            <!-- 부모/자식 댓글 -->
-	            <li class="comment-row <c:if test="${comment.parentNo != 0}">child-comment</c:if>">
+	            <li class="comment-row <c:if test='${comment.parentNo != 0}'>child-comment</c:if>">
+	                
 	                <p class="comment-writer">
 	
 	                    <!-- 프로필 이미지 -->
@@ -38,8 +39,8 @@
 	                        
 	                    <!-- 로그인 회원과 댓글 작성자가 같은 경우 -->  
 	                    <c:if test="${loginMember.memberNo == comment.memberNo}">
-		                    <button>수정</button>     
-		                    <button>삭제</button>
+		                    <button onclick="showUpdateComment(${comment.commentNo}, this)">수정</button>     
+		                    <button onclick="deleteComment(${comment.commentNo})">삭제</button>
 	                    </c:if>
 	                    
 	                </div>

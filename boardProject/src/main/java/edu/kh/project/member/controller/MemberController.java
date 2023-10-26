@@ -278,7 +278,7 @@ public class MemberController {
 	@GetMapping("/signUp")
 	public String signUp() {
 		
-		return "/member/signUp";
+		return "member/signUp";
 	}
 	
 	

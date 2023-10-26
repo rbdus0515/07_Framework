@@ -9,7 +9,8 @@
         
         	<c:forEach items="${board.commentList}" var="comment">
 	            <!-- 부모/자식 댓글 -->
-	            <li class="comment-row <c:if test="${comment.parentNo != 0}">child-comment</c:if>">
+	            <li class="comment-row <c:if test='${comment.parentNo != 0}'>child-comment</c:if>">
+	                
 	                <p class="comment-writer">
 	
 	                    <!-- 프로필 이미지 -->

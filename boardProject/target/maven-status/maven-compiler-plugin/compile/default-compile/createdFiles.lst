@@ -12,11 +12,16 @@ edu\kh\project\board\model\dto\Pagination.class
 edu\kh\project\myPage\model\service\MyPageServiceImpl.class
 edu\kh\project\board\model\dto\BoardImage.class
 edu\kh\project\board\controller\BoardController.class
+edu\kh\project\chatting\model\websocket\ChattingWebsocketHandler.class
 edu\kh\project\board\controller\CommentController.class
+edu\kh\project\chatting\controller\ChattigController.class
+edu\kh\project\chatting\model\service\ChattingServiceImpl.class
 edu\kh\project\main\controller\MainController.class
 edu\kh\project\board\model\service\BoardServiceImpl2.class
 edu\kh\project\member\model\dao\EmailDAO.class
 edu\kh\project\board\model\dao\BoardDAO.class
+edu\kh\project\main\model\websocket\TestWebSocketHandler.class
+edu\kh\project\chatting\model\dao\ChattingDAO.class
 edu\kh\project\board\model\dto\Board.class
 edu\kh\project\member\model\dao\AjaxDAO.class
 edu\kh\project\member\model\service\MemberServiceImpl.class
@@ -25,6 +30,9 @@ edu\kh\project\board\model\service\CommentServiceImpl.class
 edu\kh\project\member\model\service\AjaxService.class
 edu\kh\project\member\model\dao\MemberDAO.class
 edu\kh\project\board\model\exception\FileUploadException.class
+edu\kh\project\chatting\model\dto\Message.class
+edu\kh\project\chatting\model\service\ChattingService.class
+edu\kh\project\chatting\model\dto\ChattingRoom.class
 edu\kh\project\common\ExceptionController.class
 edu\kh\project\member\model\service\EmailService.class
 edu\kh\project\common\utility\Util.class
