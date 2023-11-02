@@ -415,8 +415,9 @@ function insertChildComment(parentNo, btn){
 				"memberNo" : loginMemberNo,
 				"boardNo" : boardNo,
 				"parentNo" : parentNo };
-   
+                
 
+                
 	fetch("/comment", {
     	method: "POST",
     	headers: {"Content-Type" : "application/json"},
